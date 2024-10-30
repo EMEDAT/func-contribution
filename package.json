@@ -1,11 +1,10 @@
 {
   "name": "func-contribution",
   "version": "1.0.0",
-  "main": "api/index.js", 
+  "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "npm install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
