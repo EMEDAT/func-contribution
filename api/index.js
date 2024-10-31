@@ -7,13 +7,27 @@ app.use(cors());
 
 app.get('/', (req, res) => {
   res.send(`
-    <h1>Welcome to the Base64 Encode API!</h1>
-    <p>Use <a href="/functions/base64Encode">/functions/base64Encode</a> for encoding.</p>
-    <p>Access your function routes:</p>
-    <ul>
-      <li>For the description, go to <a href="/functions/base64Encode">/functions/base64Encode</a>.</li>
-      <li>For encoding, send a POST request to <a href="/functions/base64Encode">/functions/base64Encode</a> with the JSON body.</li>
-    </ul>
+<h1>Welcome to the Base64 Encode API!</h1>
+<p>This API allows you to encode strings into Base64 format.</p>
+
+<h2>Functionality Overview</h2>
+<p>You can access the encoding function at the following route:</p>
+<ul>
+  <li><strong>Encoding Endpoint:</strong> Use <code>/functions/base64Encode</code> to encode your string.</li>
+</ul>
+
+<h2>Accessing Function Routes</h2>
+<p>Here’s how to interact with the Base64 Encode function:</p>
+<ul>
+  <li><strong>Get Function Documentation:</strong> Send a <code>GET</code> request to <code>/functions/base64Encode</code> to retrieve documentation about the encoding function, including input requirements and output details.</li>
+  <li><strong>Perform Encoding:</strong> To encode a string, send a <code>POST</code> request to <code>/functions/base64Encode</code> with the JSON body containing your input. For example:</li>
+</ul>
+
+<pre><code>{
+  "input": "Hello, world!"
+}</code></pre>
+
+<p>The response will provide the Base64 encoded string.</p>
   `);
 });
 
