@@ -8,11 +8,11 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.send(`
     <h1>Welcome to the Base64 Encode API!</h1>
-    <p>Use <a href="/api/functions/base64Encode">/api/functions/base64Encode</a> for encoding.</p>
+    <p>Use <a href="/functions/base64Encode">/functions/base64Encode</a> for encoding.</p>
     <p>Access your function routes:</p>
     <ul>
-      <li>For the description, go to <a href="/api/functions/base64Encode">/api/functions/base64Encode</a>.</li>
-      <li>For encoding, send a POST request to <a href="/api/functions/base64Encode">/api/functions/base64Encode</a> with the JSON body.</li>
+      <li>For the description, go to <a href="/functions/base64Encode">/functions/base64Encode</a>.</li>
+      <li>For encoding, send a POST request to <a href="/functions/base64Encode">/functions/base64Encode</a> with the JSON body.</li>
     </ul>
   `);
 });
@@ -48,5 +48,5 @@ app.get('/functions/base64Encode', (req, res) => {
   });
 });
 
-// Remove the PORT and app.listen() for Vercel
-module.exports = app; // For Vercel deployment
+// Export app for Vercel deployment
+module.exports = app;
