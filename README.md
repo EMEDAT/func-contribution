@@ -27,14 +27,14 @@ The **Base64 Encode API** is a simple web service that allows users to encode st
 
 ### 1. Documentation Endpoint (GET)
 
-- **URL:** `/functions/base64Encode`
+- **URL:** `/functions/base64EncodeEmedat`
 - **Method:** `GET`
 - **Description:** Retrieves the documentation for the Base64 encoding function.
 
 #### Response
 ```json
 {
-    "name": "base64Encode",
+    "name": "base64EncodeEmedat",
     "description": "Encode anything to base64",
     "input": {
         "type": "string",
@@ -51,7 +51,7 @@ The **Base64 Encode API** is a simple web service that allows users to encode st
 
 ### 2. Encoding Endpoint (POST)
 
-- **URL:** `/functions/base64Encode`
+- **URL:** `/functions/base64EncodeEmedat`
 - **Method:** `POST`
 - **Description:** Encodes the provided string into Base64 format.
 
@@ -77,12 +77,12 @@ Ensure that the input is included in the request body as a JSON object with the 
 ### Get Documentation
 - **Request:** 
 ```http
-GET https://func-contribution.vercel.app/functions/base64Encode
+GET https://func-contribution.vercel.app/functions/base64EncodeEmedat
 ```
 - **Response:**
 ```json
 {
-    "name": "base64Encode",
+    "name": "base64EncodeEmedat",
     "description": "Encode anything to base64",
     "input": {
         "type": "string",
@@ -100,7 +100,7 @@ GET https://func-contribution.vercel.app/functions/base64Encode
 ### Post Data for Encoding
 - **Request:**
 ```http
-POST https://func-contribution.vercel.app/functions/base64Encode
+POST https://func-contribution.vercel.app/functions/base64EncodeEmedat
 ```
 - **Body:**
 ```json

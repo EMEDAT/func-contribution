@@ -13,14 +13,14 @@ app.get('/', (req, res) => {
 <h2>Functionality Overview</h2>
 <p>You can access the encoding function at the following route:</p>
 <ul>
-  <li><strong>Encoding Endpoint:</strong> Use <a href="/functions/base64Encode">/functions/base64Encode</a> to encode your string.</li>
+  <li><strong>Encoding Endpoint:</strong> Use <a href="/functions/base64EncodeEmedat">/functions/base64EncodeEmedat</a> to encode your string.</li>
 </ul>
 
 <h2>Accessing Function Routes</h2>
 <p>Here’s how to interact with the Base64 Encode function:</p>
 <ul>
-  <li><strong>Get Function Documentation:</strong> Send a <code>GET</code> request to <a href="/functions/base64Encode">/functions/base64Encode</a> to retrieve documentation about the encoding function, including input requirements and output details.</li>
-  <li><strong>Perform Encoding:</strong> To encode a string, send a <code>POST</code> request to <a href="/functions/base64Encode">/functions/base64Encode</a> with the JSON body containing your input. For example:</li>
+  <li><strong>Get Function Documentation:</strong> Send a <code>GET</code> request to <a href="/functions/base64EncodeEmedat">/functions/base64EncodeEmedat</a> to retrieve documentation about the encoding function, including input requirements and output details.</li>
+  <li><strong>Perform Encoding:</strong> To encode a string, send a <code>POST</code> request to <a href="/functions/base64EncodeEmedat">/functions/base64EncodeEmedat</a> with the JSON body containing your input. For example:</li>
 </ul>
 
 <pre><code>{
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.post('/functions/base64Encode', async (req, res) => {
+app.post('/functions/base64EncodeEmedat', async (req, res) => {
   const { input } = req.body;
   if (!input) {
     return res.status(400).send({ error: "Input is required" });
@@ -45,9 +45,9 @@ app.post('/functions/base64Encode', async (req, res) => {
   }
 });
 
-app.get('/functions/base64Encode', (req, res) => {
+app.get('/functions/base64EncodeEmedat', (req, res) => {
   res.json({
-    name: "base64Encode",
+    name: "base64EncodeEmedat",
     description: "Encode anything to base64",
     input: {
       type: "string",
