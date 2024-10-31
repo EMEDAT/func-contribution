@@ -13,14 +13,14 @@ app.get('/', (req, res) => {
 <h2>Functionality Overview</h2>
 <p>You can access the encoding function at the following route:</p>
 <ul>
-  <li><strong>Encoding Endpoint:</strong> Use <code>/functions/base64Encode</code> to encode your string.</li>
+  <li><strong>Encoding Endpoint:</strong> Use <a href="/functions/base64Encode">/functions/base64Encode</a> to encode your string.</li>
 </ul>
 
 <h2>Accessing Function Routes</h2>
 <p>Here’s how to interact with the Base64 Encode function:</p>
 <ul>
-  <li><strong>Get Function Documentation:</strong> Send a <code>GET</code> request to <code>/functions/base64Encode</code> to retrieve documentation about the encoding function, including input requirements and output details.</li>
-  <li><strong>Perform Encoding:</strong> To encode a string, send a <code>POST</code> request to <code>/functions/base64Encode</code> with the JSON body containing your input. For example:</li>
+  <li><strong>Get Function Documentation:</strong> Send a <code>GET</code> request to <a href="/functions/base64Encode">/functions/base64Encode</a> to retrieve documentation about the encoding function, including input requirements and output details.</li>
+  <li><strong>Perform Encoding:</strong> To encode a string, send a <code>POST</code> request to <a href="/functions/base64Encode">/functions/base64Encode</a> with the JSON body containing your input. For example:</li>
 </ul>
 
 <pre><code>{
