@@ -15,8 +15,11 @@ app.post('/functions/generateResponse', async (req, res) => {
 
   let response;
 
-  // Handle specific inquiry first
-  if (message.toLowerCase().includes("can i get assistance with my account")) {
+  // Check for the specific inquiry
+  const isAccountAssistanceInquiry = message.toLowerCase().includes("can i get assistance with my account");
+
+  // Handle responses based on tone, but prioritize the specific inquiry if needed
+  if (isAccountAssistanceInquiry) {
     response = `Absolutely! We are here to assist you with your account. Please provide more details about the assistance you need.`;
   } else {
     switch (tone.toLowerCase()) {
