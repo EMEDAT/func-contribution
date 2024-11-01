@@ -41,9 +41,9 @@ app.get('/', (req, res) => {
 <p>This API helps you generate responses in various tones.</p>
 
 <h2>Endpoint</h2>
-<p><strong>POST /functions/generateResponse</strong></p>
+<p><strong>POST <a href="/functions/generateResponse">/functions/generateResponse</a></strong></p>
 <ul>
-  <li>Input JSON: { "message": "Your message here", "tone": "desired tone" }</li>
+  <li>Input JSON: <code>{ "message": "Your message here", "tone": "desired tone" }</code></li>
   <li>Supported tones: "Professional", "Empathetic", "Concise", "Friendly"</li>
 </ul>
 `);
