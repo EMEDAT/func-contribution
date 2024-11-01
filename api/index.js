@@ -15,13 +15,34 @@ app.post('/functions/generateResponse', async (req, res) => {
 
   let response;
 
-  // Check for the specific inquiry
-  const isAccountAssistanceInquiry = message.toLowerCase().includes("can i get assistance with my account");
-
-  // Handle responses based on tone, but prioritize the specific inquiry if needed
-  if (isAccountAssistanceInquiry) {
-    response = `Absolutely! We are here to assist you with your account. Please provide more details about the assistance you need.`;
+  // Handle specific inquiry first
+  if (message.toLowerCase().includes("can i get assistance with my account")) {
+    // Use tone to modify the response style
+    switch (tone.toLowerCase()) {
+      case 'professional':
+        response = `Absolutely! We are here to assist you with your account. Please provide more details about the assistance you need.`;
+        break;
+      case 'empathetic':
+        response = `Of course! We understand how important this is. Please let us know what assistance you need with your account.`;
+        break;
+      case 'concise':
+        response = `Sure! How can we assist you with your account?`;
+        break;
+      case 'friendly':
+        response = `Hey there! We're here to help you with your account. Just let us know what you need! 😊`;
+        break;
+      case 'encouraging':
+        response = `Absolutely! We're excited to help you with your account. Let us know how we can assist you!`;
+        break;
+      case 'reassuring':
+        response = `Rest assured, we’re here to help you with your account. Please share what you need assistance with.`;
+        break;
+      // Add other tones as necessary...
+      default:
+        response = `Absolutely! We are here to assist you with your account. Please provide more details about the assistance you need.`;
+    }
   } else {
+    // Handle other messages based on tone
     switch (tone.toLowerCase()) {
       case 'professional':
         response = `Thank you for reaching out. We appreciate your message and will ensure it receives the attention it deserves. Your inquiry is important to us, and we will follow up promptly.`;
@@ -38,33 +59,7 @@ app.post('/functions/generateResponse', async (req, res) => {
       case 'encouraging':
         response = `We’re excited to assist you! Your goals are important to us, and we’ll do everything we can to support you. Let’s tackle this together!`;
         break;
-      case 'reassuring':
-        response = `Rest assured, we’re on top of this! Your concerns are valid, and we’re committed to providing you with the best possible service.`;
-        break;
-      case 'persuasive':
-        response = `We believe our solutions can really help you achieve your goals. Let’s discuss how we can work together effectively!`;
-        break;
-      case 'inquisitive':
-        response = `That’s an interesting point! We’d love to hear more about your thoughts and see how we can align our solutions with your needs.`;
-        break;
-      case 'thankful':
-        response = `Thank you for your message! We appreciate your engagement and look forward to collaborating with you on this matter.`;
-        break;
-      case 'collaborative':
-        response = `Great to hear from you! We value teamwork and are eager to share ideas and work towards our common goals.`;
-        break;
-      case 'informative':
-        response = `Thank you for your inquiry! Here’s some detailed information on the topic.`;
-        break;
-      case 'directive':
-        response = `To move forward effectively, please follow these steps:`;
-        break;
-      case 'supportive':
-        response = `We’re here to help! If you need any assistance, feel free to ask. Together, we can find a solution.`;
-        break;
-      case 'casual':
-        response = `Hey! Just wanted to drop a quick note to say we’re on it. Thanks for your patience!`;
-        break;
+      // Add other tones as necessary...
       default:
         response = `Thank you for your message. We’ll do our best to assist you and ensure your needs are met.`;
     }
@@ -73,6 +68,7 @@ app.post('/functions/generateResponse', async (req, res) => {
   // Include the user's message for context if needed
   res.send({ response, originalMessage: message });
 });
+
 
 // GET request for documentation on the /functions/generateResponse endpoint
 app.get('/functions/generateResponse', (req, res) => {
