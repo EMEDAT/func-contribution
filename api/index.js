@@ -61,7 +61,6 @@ app.post('/functions/generateResponse', async (req, res) => {
     default:
       response = `Thank you for your message. We’ll do our best to assist you and ensure your needs are met. ${message}`;
   }
-  
 
   res.send({ response });
 });
@@ -80,7 +79,7 @@ app.get('/functions/generateResponse', (req, res) => {
   "message": "Can I get assistance with my account?",
   "tone": "Empathetic"
 }</code></pre>
-    <p>Supported tones include: <strong>Professional</strong>, <strong>Empathetic</strong>, <strong>Concise</strong>, and <strong>Friendly</strong>.</p>
+    <p>Supported tones include: <strong>Professional</strong>, <strong>Empathetic</strong>, <strong>Concise</strong>, <strong>Friendly</strong>, <strong>Encouraging</strong>, <strong>Reassuring</strong>, <strong>Persuasive</strong>, <strong>Inquisitive</strong>, <strong>Thankful</strong>, <strong>Collaborative</strong>, <strong>Informative</strong>, <strong>Directive</strong>, <strong>Supportive</strong>, <strong>Casual</strong>.</p>
   `);
 });
 
@@ -94,7 +93,7 @@ app.get('/', (req, res) => {
     <p><strong>POST <a href="/functions/generateResponse">/functions/generateResponse</a></strong></p>
     <ul>
       <li>Input JSON: <code>{ "message": "Your message here", "tone": "desired tone" }</code></li>
-      <li>Supported tones: "Professional", "Empathetic", "Concise", "Friendly"</li>
+      <li>Supported tones include: <strong>Professional</strong>, <strong>Empathetic</strong>, <strong>Concise</strong>, <strong>Friendly</strong>, <strong>Encouraging</strong>, <strong>Reassuring</strong>, <strong>Persuasive</strong>, <strong>Inquisitive</strong>, <strong>Thankful</strong>, <strong>Collaborative</strong>, <strong>Informative</strong>, <strong>Directive</strong>, <strong>Supportive</strong>, <strong>Casual</strong>.</li>
     </ul>
   `);
 });
