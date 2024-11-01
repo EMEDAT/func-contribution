@@ -4,7 +4,8 @@
   "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js",
-    "dev": "nodemon api/index.js"
+    "dev": "nodemon api/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "@nlpjs/basic": "^4.27.0",
@@ -14,5 +15,9 @@
   },
   "engines": {
     "node": "20.x"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }
