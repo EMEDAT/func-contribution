@@ -15,7 +15,7 @@ app.post('/functions/generateResponse', async (req, res) => {
 
   let response;
 
-  // Unique response for the specific inquiry
+  // Handle specific inquiry first
   if (message.toLowerCase().includes("can i get assistance with my account")) {
     response = `Absolutely! We are here to assist you with your account. Please provide more details about the assistance you need.`;
   } else {
