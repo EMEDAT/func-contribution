@@ -37,7 +37,30 @@ app.post('/functions/generateResponse', async (req, res) => {
       case 'reassuring':
         response = `Rest assured, we’re here to help you with your account. Please share what you need assistance with.`;
         break;
-      // Add other tones as necessary...
+      case 'persuasive':
+        response = `We're eager to assist you! Our team is ready to provide the best support for your account. Just let us know how we can help!`;
+        break;
+      case 'inquisitive':
+        response = `I’d love to help! What specific assistance do you need with your account?`;
+        break;
+      case 'thankful':
+        response = `Thank you for reaching out! We’re here to help with your account. Please tell us what you need!`;
+        break;
+      case 'collaborative':
+        response = `Let’s work together on this! We’re here to assist you with your account. What do you need help with?`;
+        break;
+      case 'informative':
+        response = `We can definitely assist you with your account. Please provide the details of your inquiry so we can assist you effectively.`;
+        break;
+      case 'directive':
+        response = `Please let us know exactly what assistance you require for your account so we can help you right away.`;
+        break;
+      case 'supportive':
+        response = `We're here for you! Please share the details of your account issue, and we'll work through it together.`;
+        break;
+      case 'casual':
+        response = `No worries! Just let us know what you need help with regarding your account, and we’ll take care of it!`;
+        break;
       default:
         response = `Absolutely! We are here to assist you with your account. Please provide more details about the assistance you need.`;
     }
@@ -59,7 +82,30 @@ app.post('/functions/generateResponse', async (req, res) => {
       case 'encouraging':
         response = `We’re excited to assist you! Your goals are important to us, and we’ll do everything we can to support you. Let’s tackle this together!`;
         break;
-      // Add other tones as necessary...
+      case 'persuasive':
+        response = `Your inquiry is important to us, and we’re ready to assist you in every way possible. How can we help you today?`;
+        break;
+      case 'inquisitive':
+        response = `What can we assist you with today? We’re here to help!`;
+        break;
+      case 'thankful':
+        response = `Thank you for your message! We value your communication and will respond as soon as possible.`;
+        break;
+      case 'collaborative':
+        response = `We appreciate your inquiry! Let's work together to find the best solution for your needs.`;
+        break;
+      case 'informative':
+        response = `Thank you for reaching out. We’re here to provide you with the information you need, so feel free to ask!`;
+        break;
+      case 'directive':
+        response = `Please provide us with specific details about your inquiry so we can assist you effectively.`;
+        break;
+      case 'supportive':
+        response = `We’re here to support you! Please let us know what you need, and we’ll help you through it.`;
+        break;
+      case 'casual':
+        response = `Thanks for reaching out! Just let us know what you need, and we’ll take care of it!`;
+        break;
       default:
         response = `Thank you for your message. We’ll do our best to assist you and ensure your needs are met.`;
     }
@@ -68,7 +114,6 @@ app.post('/functions/generateResponse', async (req, res) => {
   // Include the user's message for context if needed
   res.send({ response, originalMessage: message });
 });
-
 
 // GET request for documentation on the /functions/generateResponse endpoint
 app.get('/functions/generateResponse', (req, res) => {
