@@ -70,7 +70,7 @@ app.post('/functions/generateResponse', async (req, res) => {
 app.get('/functions/generateResponse', (req, res) => {
   res.send(`
     <h1>Generate Response Function</h1>
-    <p>This endpoint generates responses based on the given tone.</p>
+    <p>This endpoint will generate responses based on the given tone.</p>
     <p><strong>To use this endpoint:</strong></p>
     <ul>
       <li>Send a <strong>POST</strong> request to <code>/functions/generateResponse</code></li>
