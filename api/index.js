@@ -64,12 +64,125 @@ const toneResponses = {
   }
 };
 
+// OpenAPI documentation
+const openApiDoc = {
+  openapi: "3.0.0",
+  info: {
+    title: "ToneFlow API",
+    description: "An API that generates responses in different tones based on input message",
+    version: "1.0.0"
+  },
+  servers: [
+    {
+      url: "https://func-contribution.vercel.app",
+      description: "Production server"
+    }
+  ],
+  paths: {
+    "/functions/toneFlow": {
+      post: {
+        summary: "Generate a response in specified tone",
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  input: {
+                    type: "object",
+                    properties: {
+                      message: {
+                        type: "string",
+                        description: "The message to process"
+                      },
+                      tone: {
+                        type: "string",
+                        description: "The desired tone for the response",
+                        enum: Object.keys(toneResponses)
+                      }
+                    },
+                    required: ["message", "tone"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    output: {
+                      type: "object",
+                      properties: {
+                        response: {
+                          type: "string",
+                          description: "Generated response in specified tone"
+                        },
+                        originalMessage: {
+                          type: "string",
+                          description: "Original input message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          400: {
+            description: "Bad Request - Missing required parameters",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    output: {
+                      type: "object",
+                      properties: {
+                        error: {
+                          type: "string",
+                          description: "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      get: {
+        summary: "Get API documentation",
+        responses: {
+          200: {
+            description: "OpenAPI documentation",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
 // POST endpoint for generating responses
 app.post('/functions/toneFlow', async (req, res) => {
   const { input } = req.body;
 
   if (!input || !input.message || !input.tone) {
-    return res.status(400).send({
+    return res.status(400).json({
       output: { error: "Both 'message' and 'tone' are required in the input object." }
     });
   }
@@ -78,10 +191,15 @@ app.post('/functions/toneFlow', async (req, res) => {
   const toneKey = tone.toLowerCase();
   const isAccountQuery = message.toLowerCase().includes("can i get assistance with my account");
 
-  const response = toneResponses[toneKey]?.[isAccountQuery ? 'account' : 'general'] ||
-    "Thank you for your message. We'll do our best to assist you.";
+  if (!toneResponses[toneKey]) {
+    return res.status(400).json({
+      output: { error: `Invalid tone. Supported tones are: ${Object.keys(toneResponses).join(', ')}` }
+    });
+  }
 
-  res.send({
+  const response = toneResponses[toneKey][isAccountQuery ? 'account' : 'general'];
+
+  res.json({
     output: {
       response,
       originalMessage: message
@@ -89,40 +207,14 @@ app.post('/functions/toneFlow', async (req, res) => {
   });
 });
 
-// GET endpoint for documentation
+// GET endpoint for OpenAPI documentation
 app.get('/functions/toneFlow', (req, res) => {
-  res.send(`
-    <h1>ToneFlow Response Generator</h1>
-    <p>Generates responses in different tones based on input message.</p>
-    <h2>Usage:</h2>
-    <pre>
-POST /functions/toneFlow
-{
-  "input": {
-    "message": "Your message",
-    "tone": "desired tone"
-  }
-}
-    </pre>
-    <p>Output format:</p>
-    <pre>
-{
-  "output": {
-    "response": "Generated response",
-    "originalMessage": "Your original message"
-  }
-}
-    </pre>
-    <p>Supported tones include: <strong>Professional</strong>, <strong>Empathetic</strong>, <strong>Concise</strong>, <strong>Friendly</strong>, <strong>Encouraging</strong>, <strong>Reassuring</strong>, <strong>Persuasive</strong>, <strong>Inquisitive</strong>, <strong>Thankful</strong>, <strong>Collaborative</strong>, <strong>Informative</strong>, <strong>Directive</strong>, <strong>Supportive</strong>, <strong>Casual</strong>.</p>
-  `);
+  res.json(openApiDoc);
 });
 
-// Root route for basic HTML documentation
+// Root route redirects to documentation
 app.get('/', (req, res) => {
-  res.send(`
-    <h1>Welcome to the ToneFlow API!</h1>
-    <p>This API generates responses in various tones based on your input message.</p>
-  `);
+  res.redirect('/functions/toneFlow');
 });
 
 module.exports = app;
