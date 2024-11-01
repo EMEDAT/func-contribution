@@ -1,15 +1,16 @@
-# Base64 Encode API
+
+# ToneFlow API
 
 ## Overview
 
-The **Base64 Encode API** is a simple web service that allows users to encode strings into Base64 format. This API exposes endpoints for encoding data and provides detailed documentation for ease of use.
+The **ToneFlow API** is designed to generate dynamic responses based on user input tone preferences. This API supports multiple tones, allowing my users to receive responses tailored to different communication styles. Whether you're a Customer Support Agent, Marketing & Content Specialist, Sales Representative, Social Media Managers, Healthcare & Mental Health Professionals, Human Resources Professional, Educator & Trainer, or even a Legal & Financial Consultant; this will help you communicate better with your users/clients.
 
 ## Table of Contents
 
 - [Features](#features)
 - [Endpoints](#endpoints)
   - [Documentation Endpoint](#1-documentation-endpoint-get)
-  - [Encoding Endpoint](#2-encoding-endpoint-post)
+  - [ToneFlow Response Endpoint](#2-toneflow-response-endpoint-post)
 - [Usage Example](#usage-example)
 - [Installation](#installation)
 - [Running the API Locally](#running-the-api-locally)
@@ -19,99 +20,82 @@ The **Base64 Encode API** is a simple web service that allows users to encode st
 
 ## Features
 
-- Encode any string to Base64 format.
-- Provides clear documentation for each endpoint.
-- Simple and easy-to-use API.
+- Supports diverse tones for contextual responses, including professional, empathetic, concise, friendly, and more.
+- Detailed API documentation available at each endpoint.
+- Built with Express and CORS to support cross-origin requests.
 
 ## Endpoints
 
 ### 1. Documentation Endpoint (GET)
 
-- **URL:** `/functions/base64EncodeEmedat`
+- **URL:** `/functions/toneFlow`
 - **Method:** `GET`
-- **Description:** Retrieves the documentation for the Base64 encoding function.
+- **Description:** Retrieves documentation for the ToneFlow endpoint, explaining usage and available tones.
 
-#### Response
-```json
-{
-    "name": "base64EncodeEmedat",
-    "description": "Encode anything to base64",
-    "input": {
-        "type": "string",
-        "description": "Input the data you'd like to encode to base64",
-        "example": "Hello, world"
-    },
-    "output": {
-        "type": "string",
-        "description": "Base64 encoded string",
-        "example": "SGVsbG8sIHdvcmxk"
-    }
-}
-```
+### 2. ToneFlow Response Endpoint (POST)
 
-### 2. Encoding Endpoint (POST)
-
-- **URL:** `/functions/base64EncodeEmedat`
+- **URL:** `/functions/toneFlow`
 - **Method:** `POST`
-- **Description:** Encodes the provided string into Base64 format.
+- **Description:** Generates a contextual response based on the provided message and desired tone.
 
 #### Request Body
 ```json
 {
-    "input": "Hello, world!"
+    "message": "Can I get assistance with my account?",
+    "tone": "Empathetic"
 }
 ```
 
 #### Response
 ```json
 {
-    "output": "SGVsbG8sIHdvcmxkIQ=="
+    "response": "Of course! We understand how important this is. Please let us know what assistance you need with your account.",
+    "originalMessage": "Can I get assistance with my account?"
 }
 ```
 
-#### Notes
-Ensure that the input is included in the request body as a JSON object with the key "input".
+### Supported Tones
+- Professional
+- Empathetic
+- Concise
+- Friendly
+- Encouraging
+- Reassuring
+- Persuasive
+- Inquisitive
+- Thankful
+- Collaborative
+- Informative
+- Directive
+- Supportive
+- Casual
 
 ## Usage Example
 
 ### Get Documentation
 - **Request:** 
 ```http
-GET https://func-contribution.vercel.app/functions/base64EncodeEmedat
+GET https://<your-deployment-url>/functions/toneFlow
 ```
-- **Response:**
-```json
-{
-    "name": "base64EncodeEmedat",
-    "description": "Encode anything to base64",
-    "input": {
-        "type": "string",
-        "description": "Input the data you'd like to encode to base64",
-        "example": "Hello, world"
-    },
-    "output": {
-        "type": "string",
-        "description": "Base64 encoded string",
-        "example": "SGVsbG8sIHdvcmxk"
-    }
-}
-```
+- **Response:** Displays HTML documentation for the ToneFlow API.
 
-### Post Data for Encoding
+### Post for Contextual Response
 - **Request:**
 ```http
-POST https://func-contribution.vercel.app/functions/base64EncodeEmedat
+POST https://<your-deployment-url>/functions/toneFlow
 ```
 - **Body:**
 ```json
 {
-    "input": "Hello, world!"
+    "message": "Can I get assistance with my account?",
+    "tone": "Friendly"
 }
 ```
 - **Response:**
 ```json
 {
-    "output": "SGVsbG8sIHdvcmxkIQ=="
+    "response": "Hey there! We're here to help you with your account. Just let us know what you need! 😊",
+    "originalMessage": "Can I get assistance with my account?"
 }
 ```
 
@@ -121,11 +105,11 @@ To set up the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/EMEDAT/func-contribution.git
+   git clone https://github.com/your-username/ToneFlow.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd func-contribution
+   cd ToneFlow
    ```
 3. Install the dependencies:
    ```bash
@@ -144,7 +128,7 @@ The server will be running at `http://localhost:3000`.
 
 ## Deployment
 
-To deploy the API, you can use Vercel or any cloud provider of your choice. Ensure you follow the specific instructions for deployment on your chosen platform.
+Deploy the API using Vercel or another cloud provider. Ensure you follow specific instructions for deployment on your chosen platform.
 
 ## Contributing
 
