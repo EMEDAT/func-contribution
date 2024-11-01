@@ -5,61 +5,48 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Main Contextual Response Function
+app.post('/functions/generateResponse', async (req, res) => {
+  const { message, tone } = req.body;
+
+  if (!message || !tone) {
+    return res.status(400).send({ error: "Both 'message' and 'tone' are required." });
+  }
+
+  let response;
+
+  switch (tone.toLowerCase()) {
+    case 'professional':
+      response = `Thank you for reaching out. We appreciate your message and will ensure it receives the attention it deserves. ${message}`;
+      break;
+    case 'empathetic':
+      response = `I understand how you feel and appreciate your patience. Please know we’re here to help. ${message}`;
+      break;
+    case 'concise':
+      response = `We’ve received your message and will respond accordingly. ${message}`;
+      break;
+    case 'friendly':
+      response = `Hey there! Thanks for your message! We’ll get back to you soon. 😊 ${message}`;
+      break;
+    default:
+      response = `Thank you for your message. We’ll do our best to assist. ${message}`;
+  }
+
+  res.send({ response });
+});
+
 app.get('/', (req, res) => {
   res.send(`
-<h1>Welcome to the Base64 Encode API!</h1>
-<p>This API allows you to encode strings into Base64 format.</p>
+<h1>Welcome to the Contextual Response API!</h1>
+<p>This API helps you generate responses in various tones.</p>
 
-<h2>Functionality Overview</h2>
-<p>You can access the encoding function at the following route:</p>
+<h2>Endpoint</h2>
+<p><strong>POST /functions/generateResponse</strong></p>
 <ul>
-  <li><strong>Encoding Endpoint:</strong> Use <a href="/functions/base64EncodeEmedat">/functions/base64EncodeEmedat</a> to encode your string.</li>
+  <li>Input JSON: { "message": "Your message here", "tone": "desired tone" }</li>
+  <li>Supported tones: "Professional", "Empathetic", "Concise", "Friendly"</li>
 </ul>
-
-<h2>Accessing Function Routes</h2>
-<p>Here’s how to interact with the Base64 Encode function:</p>
-<ul>
-  <li><strong>Get Function Documentation:</strong> Send a <code>GET</code> request to <a href="/functions/base64EncodeEmedat">/functions/base64EncodeEmedat</a> to retrieve documentation about the encoding function, including input requirements and output details.</li>
-  <li><strong>Perform Encoding:</strong> To encode a string, send a <code>POST</code> request to <a href="/functions/base64EncodeEmedat">/functions/base64EncodeEmedat</a> with the JSON body containing your input. For example:</li>
-</ul>
-
-<pre><code>{
-  "input": "Hello, world!"
-}</code></pre>
-
-<p>The response will provide the Base64 encoded string.</p>
-  `);
-});
-
-app.post('/functions/base64EncodeEmedat', async (req, res) => {
-  const { input } = req.body;
-  if (!input) {
-    return res.status(400).send({ error: "Input is required" });
-  }
-  try {
-    const output = Buffer.from(input).toString('base64');
-    res.send({ output });
-  } catch (error) {
-    console.error('Encoding error:', error);
-    res.status(500).send({ error: "Internal Server Error" });
-  }
-});
-
-app.get('/functions/base64EncodeEmedat', (req, res) => {
-  res.json({
-    name: "base64EncodeEmedat",
-    description: "Encode anything to base64",
-    input: {
-      type: "string",
-      description: "Input the data you'd like to encode to base64",
-      example: "Hello, world"
-    },
-    output: {
-      type: "string",
-      description: "Base64 encoded string",
-      example: "SGVsbG8sIHdvcmxk"
-    }
-  });
+`);
 });
 
 // Export app for Vercel deployment
