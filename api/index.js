@@ -89,7 +89,7 @@ app.post('/functions/toneFlow', async (req, res) => {
   });
 });
 
-// GET endpoint for documentation - Updated to match required format
+// GET endpoint for documentation - Updated it to match required format
 app.get('/functions/toneFlow', (req, res) => {
   res.json({
     name: "ToneFlow",
