@@ -1,0 +1,5 @@
+{
+    "url": "https://func-contribution.vercel.app/functions/toneFlow",
+    "name": "ToneFlow",
+    "description": "Generates responses in different tones based on input message"
+  }

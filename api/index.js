@@ -70,7 +70,7 @@ app.post('/functions/toneFlow', async (req, res) => {
 
   if (!input || !input.message || !input.tone) {
     return res.status(400).send({
-      output: { error: "Both 'message' and 'tone' are required in the input object." }
+      output: { error: "Both 'message' and 'tone' are required." }
     });
   }
 
@@ -89,40 +89,69 @@ app.post('/functions/toneFlow', async (req, res) => {
   });
 });
 
-// GET endpoint for documentation
+// GET endpoint for documentation - Updated to match required format
 app.get('/functions/toneFlow', (req, res) => {
-  res.send(`
-    <h1>ToneFlow Response Generator</h1>
-    <p>Generates responses in different tones based on input message.</p>
-    <h2>Usage:</h2>
-    <pre>
-POST /functions/toneFlow
-{
-  "input": {
-    "message": "Your message",
-    "tone": "desired tone"
-  }
-}
-    </pre>
-    <p>Output format:</p>
-    <pre>
-{
-  "output": {
-    "response": "Generated response",
-    "originalMessage": "Your original message"
-  }
-}
-    </pre>
-    <p>Supported tones include: <strong>Professional</strong>, <strong>Empathetic</strong>, <strong>Concise</strong>, <strong>Friendly</strong>, <strong>Encouraging</strong>, <strong>Reassuring</strong>, <strong>Persuasive</strong>, <strong>Inquisitive</strong>, <strong>Thankful</strong>, <strong>Collaborative</strong>, <strong>Informative</strong>, <strong>Directive</strong>, <strong>Supportive</strong>, <strong>Casual</strong>.</p>
-  `);
+  res.json({
+    name: "ToneFlow",
+    description: "Generates responses in different tones based on input message",
+    input: {
+      type: "object",
+      description: "Input object containing message and desired tone",
+      example: {
+        message: "Can I get assistance with my account",
+        tone: "professional"
+      },
+      properties: {
+        message: {
+          type: "string",
+          description: "The message to be processed"
+        },
+        tone: {
+          type: "string",
+          description: "The desired tone for the response",
+          enum: [
+            "professional",
+            "empathetic",
+            "concise",
+            "friendly",
+            "encouraging",
+            "reassuring",
+            "persuasive",
+            "inquisitive",
+            "thankful",
+            "collaborative",
+            "informative",
+            "directive",
+            "supportive",
+            "casual"
+          ]
+        }
+      }
+    },
+    output: {
+      type: "object",
+      description: "Generated response with original message",
+      example: {
+        response: "Absolutely! We are here to assist you with your account. Please provide more details about the assistance you need.",
+        originalMessage: "Can I get assistance with my account"
+      },
+      properties: {
+        response: {
+          type: "string",
+          description: "The generated response in the requested tone"
+        },
+        originalMessage: {
+          type: "string",
+          description: "The original input message"
+        }
+      }
+    }
+  });
 });
 
-// Root route for basic HTML documentation
+// Root route redirects to function documentation
 app.get('/', (req, res) => {
-  res.send(`
-    <h1>Welcome to the ToneFlow API!</h1>
-    <p>This API generates responses in various tones based on your input message.</p>
-  `);
+  res.redirect('/functions/toneFlow');
 });
 
 module.exports = app;
